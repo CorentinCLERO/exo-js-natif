@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from './users/users.module';
 import { MoviesModule } from './movies/movies.module';
+import { ReservationsModule } from './reservations/reservations.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { MoviesModule } from './movies/movies.module';
     }),
     UsersModule,
     MoviesModule,
+    ReservationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

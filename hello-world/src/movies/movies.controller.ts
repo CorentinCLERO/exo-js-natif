@@ -1,6 +1,6 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
 import { MoviesService } from './movies.service';
-import { ApiOperation, ApiQuery } from '@nestjs/swagger';
+import { ApiOperation, ApiParam, ApiQuery } from '@nestjs/swagger';
 
 enum SearchBy {
   ORIGINAL_TITLE_ASC = 'original_title.asc',
@@ -49,11 +49,17 @@ export class MoviesController {
     @Query('search') search: string,
     @Query('sort_by') sort_by: string,
   ) {
-    return await this.moviesService.findAllWithFilters(page, search, sort_by);
+    return await this.moviesService.findAllWithFilters(+page, search, sort_by);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.moviesService.findOne(+id);
+  @ApiOperation({ summary: 'Request film by id' })
+  @ApiParam({
+    name: 'id',
+    required: true,
+    description: 'Id de recherche',
+  })
+  findOne(@Param('id') id: number) {
+    return this.moviesService.findOne(id);
   }
 }

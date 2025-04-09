@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { AxiosError, AxiosResponse } from 'axios';
+import { AxiosError } from 'axios';
 import { catchError, firstValueFrom } from 'rxjs';
 
 export interface Movie {
@@ -36,7 +36,7 @@ export class MoviesService {
     page: number,
     search: string | null,
     sort_by: string | null,
-  ): Promise<unknown> {
+  ): Promise<{ results: MovieResponse }> {
     if (sort_by && search) {
       console.log('sort_by', sort_by, 'search', search);
       throw new BadRequestException(
@@ -52,9 +52,9 @@ export class MoviesService {
       this.url = 'https://api.themoviedb.org/3/movie/now_playing';
     }
     // https://docs.nestjs.com/techniques/http-module#full-example
-    const response: AxiosResponse<unknown> = await firstValueFrom(
+    const response = await firstValueFrom(
       this.httpService
-        .get(this.url, {
+        .get<{ results: MovieResponse }>(this.url, {
           headers: { Authorization: `Bearer ${process.env.MOVIE_TOKEN}` },
           params: { page, query: search, sort_by },
         })
@@ -69,7 +69,20 @@ export class MoviesService {
     return data;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} movie`;
+  async findOne(id: number): Promise<{ results: Movie }> {
+    const response = await firstValueFrom(
+      this.httpService
+        .get<{ results: Movie }>(`https://api.themoviedb.org/3/movie/${id}`, {
+          headers: { Authorization: `Bearer ${process.env.MOVIE_TOKEN}` },
+        })
+        .pipe(
+          catchError((error: AxiosError) => {
+            console.error(error?.response?.data);
+            throw new Error('An error happened!');
+          }),
+        ),
+    );
+    const data = response.data;
+    return data;
   }
 }
