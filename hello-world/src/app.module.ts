@@ -10,7 +10,6 @@ import { ReservationsModule } from './reservations/reservations.module';
 
 @Module({
   imports: [
-    AuthModule,
     // https://docs.nestjs.com/techniques/configuration#use-module-globally
     ConfigModule.forRoot({
       isGlobal: true,
@@ -26,6 +25,7 @@ import { ReservationsModule } from './reservations/reservations.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
+    AuthModule,
     UsersModule,
     MoviesModule,
     ReservationsModule,

@@ -59,7 +59,7 @@ export class MoviesController {
     required: true,
     description: 'Id de recherche',
   })
-  findOne(@Param('id') id: number) {
-    return this.moviesService.findOne(id);
+  async findOne(@Param('id') id: number) {
+    return await this.moviesService.findOne(id);
   }
 }
