@@ -113,9 +113,5 @@ The frontend application should now be running, typically on `http://localhost:5
 
 - `cinema-app/`: Contains the frontend React application.
 - `hello-world/`: Contains the backend NestJS application.
-- `exo-js-natif/`: Contains standalone JavaScript exercises (likely not part of the main app).
+- `exo-js-natif/`: Contains standalone JavaScript exercises (not part of the main app).
 - `README.md`: This file.
-
-```
-
-```

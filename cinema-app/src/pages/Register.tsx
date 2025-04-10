@@ -51,7 +51,6 @@ const RegisterPage = () => {
   });
 
   const onRegisterSubmit = async (values: z.infer<typeof registerSchema>) => {
-    console.log("onRegisterSubmit : ", values);
     await register(values.email, values.password);
   };
 

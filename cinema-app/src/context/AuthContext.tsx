@@ -8,6 +8,8 @@ import React, {
 import { useToast } from "@/components/ui/use-toast";
 import { useNavigate } from "react-router-dom";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 type User = {
   sub?: number;
   email?: string;
@@ -54,7 +56,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const fetchUserDetails = async (userToken: string) => {
     try {
-      const response = await fetch("http://localhost:3000/users/me", {
+      const response = await fetch(`${BASE_URL}/users/me`, {
         headers: {
           Authorization: `Bearer ${userToken}`,
         },
@@ -80,7 +82,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const login = async (email: string, password: string) => {
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:3000/auth/login", {
+      const response = await fetch(`${BASE_URL}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -122,7 +124,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const register = async (email: string, password: string) => {
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:3000/auth/register", {
+      const response = await fetch(`${BASE_URL}/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
