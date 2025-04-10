@@ -9,9 +9,7 @@ export class AuthController {
 
   @Post('/register')
   @ApiOperation({ summary: 'Register new User' })
-  async register(
-    @Body() registerDto: RegisterDto,
-  ): Promise<{ email: string; name: string }> {
+  async register(@Body() registerDto: RegisterDto): Promise<{ email: string }> {
     const userInfo = await this.authService.register(registerDto);
     return userInfo;
   }

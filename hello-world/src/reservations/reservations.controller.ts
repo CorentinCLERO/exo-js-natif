@@ -20,7 +20,7 @@ export class ReservationsController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @Get()
-  async findAll(@Request() req: { user: { sub: number; username: string } }) {
+  async findAll(@Request() req: { user: { sub: number; email: string } }) {
     return await this.reservationsService.findAll(req.user.sub);
   }
 
@@ -29,7 +29,7 @@ export class ReservationsController {
   @Post()
   async create(
     @Body() createResevationDto: CreateReservationDto,
-    @Request() req: { user: { sub: number; username: string } },
+    @Request() req: { user: { sub: number; email: string } },
   ) {
     const { movieId, time } = createResevationDto;
     return await this.reservationsService.create(req.user.sub, time, movieId);
@@ -39,7 +39,7 @@ export class ReservationsController {
   @ApiBearerAuth()
   @Delete('/:id')
   async deleteById(
-    @Request() req: { user: { sub: number; username: string } },
+    @Request() req: { user: { sub: number; email: string } },
     @Param('id') id: number,
   ) {
     return this.reservationsService.deleteById(req.user.sub, id);

@@ -15,7 +15,7 @@ export class UsersController {
       type: 'object',
       properties: {
         sub: { type: 'string' },
-        username: { type: 'string' },
+        email: { type: 'string' },
       },
     },
   })
@@ -30,9 +30,9 @@ export class UsersController {
       },
     },
   })
-  getProfile(@Request() req: { user: { sub: number; username: string } }): {
+  getProfile(@Request() req: { user: { sub: number; email: string } }): {
     sub: number;
-    username: string;
+    email: string;
   } {
     return req.user;
   }

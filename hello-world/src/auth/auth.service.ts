@@ -18,10 +18,8 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async register(
-    registerDto: RegisterDto,
-  ): Promise<{ email: string; name: string }> {
-    const { email, password, name } = registerDto;
+  async register(registerDto: RegisterDto): Promise<{ email: string }> {
+    const { email, password } = registerDto;
 
     const userExists = await this.usersRepository.findOneBy({ email });
 
@@ -31,9 +29,9 @@ export class AuthService {
 
     const passwordCrypt: string = await bcrypt.hash(password, 8);
 
-    await this.usersRepository.save({ email, password: passwordCrypt, name });
+    await this.usersRepository.save({ email, password: passwordCrypt });
 
-    return { email, name };
+    return { email };
   }
 
   async login(loginDto: LoginDto): Promise<{ accessToken: string }> {
@@ -51,7 +49,7 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    const payload = { sub: user.id, username: user.name };
+    const payload = { sub: user.id, email: user.email };
 
     return {
       accessToken: await this.jwtService.signAsync(payload),

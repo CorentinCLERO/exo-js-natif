@@ -5,10 +5,6 @@ import { IsString } from 'class-validator';
 
 export class RegisterDto {
   // https://docs.nestjs.com/openapi/cli-plugin
-  @ApiProperty({ default: 'John Doe' })
-  @IsString()
-  name: string;
-
   @ApiProperty({ default: 'john.doe@email.com' })
   @IsString()
   email: string;
