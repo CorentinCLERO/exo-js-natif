@@ -1,7 +1,12 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
-import { MoviesService } from './movies.service';
-import { ApiOperation, ApiParam, ApiQuery } from '@nestjs/swagger';
-
+import { MoviesService, MovieResponse } from './movies.service';
+import {
+  ApiOperation,
+  ApiParam,
+  ApiQuery,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 enum SearchBy {
   ORIGINAL_TITLE_ASC = 'original_title.asc',
   ORIGINAL_TITLE_DESC = 'original_title.desc',
@@ -19,6 +24,7 @@ enum SearchBy {
   VOTE_COUNT_DESC = 'vote_count.desc',
 }
 
+@ApiTags('Movies')
 @Controller('movies')
 export class MoviesController {
   constructor(private readonly moviesService: MoviesService) {}
@@ -44,11 +50,19 @@ export class MoviesController {
     default: 1,
     enum: SearchBy,
   })
+  @ApiResponse({
+    status: 200,
+    description: 'List of movies matching criteria',
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Bad Request',
+  })
   async findAll(
     @Query('page') page: number = 1,
     @Query('search') search: string,
     @Query('sort_by') sort_by: string,
-  ) {
+  ): Promise<{ results: MovieResponse }> {
     return await this.moviesService.findAllWithFilters(+page, search, sort_by);
   }
 
@@ -57,8 +71,10 @@ export class MoviesController {
   @ApiParam({
     name: 'id',
     required: true,
-    description: 'Id de recherche',
+    description: 'Movie ID',
   })
+  @ApiResponse({ status: 200, description: 'Movie details found' })
+  @ApiResponse({ status: 404, description: 'Movie not found' })
   async findOne(@Param('id') id: number) {
     return await this.moviesService.findOne(id);
   }
