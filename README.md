@@ -52,9 +52,6 @@ DB_USERNAME=postgres # Default from docker-compose.yml
 DB_PASSWORD=postgres # Default from docker-compose.yml
 DB_DATABASE=moovieBooker # Default from docker-compose.yml
 
-# JWT Configuration
-JWT_SECRET=your_strong_secret_key # Change this to a secure random string
-
 # TMDB API Configuration
 # Obtain an API key from https://www.themoviedb.org/settings/api
 TMDB_API_KEY=your_tmdb_api_key
@@ -115,4 +112,3 @@ The frontend application should now be running, typically on `http://localhost:5
 - `cinema-app/`: Contains the frontend React application.
 - `hello-world/`: Contains the backend NestJS application.
 - `exo-js-natif/`: Contains standalone JavaScript exercises (not part of the main app).
-- `README.md`: This file.
