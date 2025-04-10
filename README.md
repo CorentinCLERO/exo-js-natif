@@ -11,7 +11,8 @@ The application is composed of two main parts:
 
 The application is deployed on Render and can be accessed here:
 
-[**https://moviebooker-fm85.onrender.com/**](https://moviebooker-fm85.onrender.com/)
+Frontend : [**https://moviebooker-fm85.onrender.com/**](https://moviebooker-fm85.onrender.com/)
+Backend (API) : [**https://exo-js-natif.onrender.com/api**](https://exo-js-natif.onrender.com/api)
 
 ## Running Locally
 
