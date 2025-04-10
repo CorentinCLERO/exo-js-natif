@@ -4,7 +4,6 @@ import { Reservation } from './reservations.entity';
 import { Between, Repository } from 'typeorm';
 import { HttpService } from '@nestjs/axios';
 import { catchError, firstValueFrom } from 'rxjs';
-import { Movie } from 'src/movies/entities/movie.entity';
 import { AxiosError } from 'axios';
 
 @Injectable()
@@ -34,12 +33,9 @@ export class ReservationsService {
 
     await firstValueFrom(
       this.httpService
-        .get<{ results: Movie }>(
-          `https://api.themoviedb.org/3/movie/${movieId}`,
-          {
-            headers: { Authorization: `Bearer ${process.env.MOVIE_TOKEN}` },
-          },
-        )
+        .get(`https://api.themoviedb.org/3/movie/${movieId}`, {
+          headers: { Authorization: `Bearer ${process.env.MOVIE_TOKEN}` },
+        })
         .pipe(
           catchError((error: AxiosError) => {
             console.error(error?.response?.data);

@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Param,
   Post,
   Request,
   UseGuards,
@@ -10,7 +11,7 @@ import {
 import { ReservationsService } from './reservations.service';
 import { JwtAuthGuard } from 'src/auth/auth.guard';
 import { ApiBearerAuth } from '@nestjs/swagger';
-import { CreateReservationDto, DeleteReservationDto } from './reservations.dto';
+import { CreateReservationDto } from './reservations.dto';
 
 @Controller('reservations')
 export class ReservationsController {
@@ -36,12 +37,11 @@ export class ReservationsController {
 
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
-  @Delete()
+  @Delete('/:id')
   async deleteById(
-    @Body() deleteResevationDto: DeleteReservationDto,
     @Request() req: { user: { sub: number; username: string } },
+    @Param('id') id: number,
   ) {
-    const { movieId } = deleteResevationDto;
-    return this.reservationsService.deleteById(req.user.sub, movieId);
+    return this.reservationsService.deleteById(req.user.sub, id);
   }
 }

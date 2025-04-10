@@ -17,6 +17,12 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, documentFactory);
   // https://docs.nestjs.com/techniques/validation#using-the-built-in-validationpipe
   app.useGlobalPipes(new ValidationPipe());
+  // https://docs.nestjs.com/security/cors#getting-started
+  app.enableCors({
+    origin: '*',
+    methods: 'GET,PUT,POST,PATCH,DELETE,HEAD',
+    credentials: true,
+  });
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();
