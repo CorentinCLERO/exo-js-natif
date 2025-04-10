@@ -5,7 +5,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { User } from 'src/users/users.entity';
+import { User } from '../users/users.entity';
 // https://stackoverflow.com/questions/65792347/circular-dependency-between-entities
 import type { User as UserType } from 'src/users/users.entity';
 import { ApiProperty } from '@nestjs/swagger';
