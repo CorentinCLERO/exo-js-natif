@@ -11,16 +11,15 @@ The application is composed of two main parts:
 
 The application is deployed on Render and can be accessed here:
 
-[**<< INSERT RENDER URL HERE >>**](<< INSERT RENDER URL HERE >>)
+[**https://moviebooker-fm85.onrender.com/**](https://moviebooker-fm85.onrender.com/)
 
 ## Running Locally
 
 ### Prerequisites
 
-*   [Node.js](https://nodejs.org/) (v18 or later recommended)
-*   [npm](https://www.npmjs.com/) (usually comes with Node.js)
-*   [Bun](https://bun.sh/) (for the frontend)
-*   [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) (for the database)
+- [Node.js](https://nodejs.org/) (v18 or later recommended)
+- [npm](https://www.npmjs.com/) (usually comes with Node.js)
+- [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) (for the database)
 
 ### 1. Backend Setup (`hello-world/`)
 
@@ -91,13 +90,13 @@ The frontend needs to know the URL of the backend API. Create a `.env.local` fil
 VITE_API_URL=http://localhost:3000
 ```
 
-*(Note: Adjust the port if your backend runs on a different one)*
+_(Note: Adjust the port if your backend runs on a different one)_
 
 **b. Install Dependencies:**
 
 ```bash
 cd cinema-app
-bun install
+npm install
 cd ..
 ```
 
@@ -105,15 +104,18 @@ cd ..
 
 ```bash
 cd cinema-app
-bun run dev
+npm run dev
 ```
 
 The frontend application should now be running, typically on `http://localhost:5173` (Vite will indicate the exact URL). Open this URL in your browser.
 
 ## Project Structure
 
-*   `cinema-app/`: Contains the frontend React application.
-*   `hello-world/`: Contains the backend NestJS application.
-*   `exo-js-natif/`: Contains standalone JavaScript exercises (likely not part of the main app).
-*   `README.md`: This file.
+- `cinema-app/`: Contains the frontend React application.
+- `hello-world/`: Contains the backend NestJS application.
+- `exo-js-natif/`: Contains standalone JavaScript exercises (likely not part of the main app).
+- `README.md`: This file.
+
+```
+
 ```

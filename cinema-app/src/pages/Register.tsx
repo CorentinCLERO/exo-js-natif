@@ -130,12 +130,8 @@ const RegisterPage = () => {
               <p className="text-sm text-muted-foreground">
                 <>
                   Déjà un compte ?{" "}
-                  <Button
-                    variant="link"
-                    className="p-0"
-                    onClick={() => (window.location.href = "/login")}
-                  >
-                    Se connecter
+                  <Button variant="link" className="p-0">
+                    <Link to="/login">Se connecter</Link>
                   </Button>
                 </>
               </p>

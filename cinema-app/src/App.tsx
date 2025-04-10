@@ -12,7 +12,7 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Reservations from "./pages/Reservations";
 import NotFound from "./pages/NotFound";
-import RegisterPage from "./pages/Register";
+import Register from "./pages/Register";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -35,7 +35,7 @@ const App = () => (
             <Route path="/movies/:id" element={<MovieDetails />} />
             <Route path="/search" element={<SearchResults />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/reservations" element={<Reservations />} />
             <Route path="*" element={<NotFound />} />
